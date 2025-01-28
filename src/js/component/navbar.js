@@ -1,17 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/index.css";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto">
-				<Link to="/demo">
-					<button className="btn btn-primary">Check the Context in action</button>
-				</Link>
-			</div>
-		</nav>
+	  <nav className="navbar mb-3">
+		<div className="navbar-content">
+		  <img className="star-wars-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Star_Wars_Logo..png/640px-Star_Wars_Logo..png" alt="Star Wars Logo" />
+		</div>
+	  </nav>
 	);
-};
+  };
+  
