@@ -1,11 +1,11 @@
 /* General Styles for Navbar */
 .navbar {
-    position: fixed; /* Esto lo hace fijo */
-    top: 0; /* Asegura que esté en la parte superior */
-    left: 0; /* Asegura que esté alineado a la izquierda */
-    width: 100%; /* Asegura que ocupe todo el ancho de la página */
-    z-index: 1000; /* Se asegura de que esté sobre otros elementos */
-    background-color: rgb(9, 8, 20); /* Fondo oscuro */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000; 
+    background-color: rgba(0, 0, 0, 0.852);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,30 +14,74 @@
   }
   .navbar-content {
     display: flex;
-    justify-content: center; /* Asegura que el logo esté centrado */
+    justify-content: center; 
   }
   
   .star-wars-logo {
-    width: 400px; /* Ajusta el tamaño del logo */
-    height: auto;  /* Mantén las proporciones */
+    width: 600px; 
+    height: auto; 
   }
   
   body {
-    background-color: rgb(9, 8, 20); /* Fondo oscuro para el cuerpo */
+    background-color: rgb(0, 0, 0);
     color: white; /* Color del texto en blanco */
     margin-top:400px;
-
     padding: 0; /* Elimina relleno por defecto */
   }
   
 
   @font-face {
     font-family: "Star Jedi"; 
-    src: url("../../docs/assets/fonts/Starjedi.ttf") format("truetype"); 
+    src: url("/docs/assets/fonts/Starjedi.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
   }
-
   h1{
     font-family: "Star Jedi", sans-serif;
+  }
+
+  .photo-grid-home {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    justify-items: stretch; 
+    align-items: stretch; 
+    padding: 20px;
+    row-gap: 50px;
+  }
+  
+  .photo-grid-home img {
+    width: 100%; 
+    max-width: 600px;
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.235); 
+  position: relative;
+  }
+  
+  .image-container {
+    position: relative; /* Para posicionar el texto sobre la imagen */
+    width: 100%;
+    height: 300px; /* Igual que la altura de la imagen */
+    font-family: sans-serif;
+  }
+
+  .text-overlay {
+    position: absolute;
+    bottom: 0; /* Fija la franja en la parte inferior */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    color: white; /* Color blanco para el texto */
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: font-size 0.3s ease;
+  }
+
+  .image-container:hover .text-overlay {
+    font-size: 20px; /* Aumenta el tamaño del texto cuando pasas el cursor */
   }
