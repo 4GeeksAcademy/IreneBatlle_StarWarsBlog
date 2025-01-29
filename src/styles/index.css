@@ -1,87 +1,159 @@
 /* General Styles for Navbar */
 .navbar {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    z-index: 1000; 
-    background-color: rgba(0, 0, 0, 0.852);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    border-radius: 8px;
-  }
-  .navbar-content {
-    display: flex;
-    justify-content: center; 
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.852);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 8px;
   
-  .star-wars-logo {
-    width: 600px; 
-    height: auto; 
-  }
-  
-  body {
-    background-color: rgb(0, 0, 0);
-    color: white; /* Color del texto en blanco */
-    margin-top:400px;
-    padding: 0; /* Elimina relleno por defecto */
-  }
-  
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8) 100%), 
+  url("https://static.vecteezy.com/system/resources/thumbnails/019/834/077/original/stars-on-black-background-video.jpg");
 
-  @font-face {
-    font-family: "Star Jedi"; 
-    src: url("/docs/assets/fonts/Starjedi.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-  h1{
-    font-family: "Star Jedi", sans-serif;
-  }
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+}
 
-  .photo-grid-home {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px;
-    justify-items: stretch; 
-    align-items: stretch; 
-    padding: 20px;
-    row-gap: 50px;
-  }
+.navbar-content {
+  display: flex;
+  justify-content: center;
+}
+
+.star-wars-logo {
+  width: 600px;
+  height: auto;
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  margin-top: 400px;
+  padding: 0;
   
-  .photo-grid-home img {
-    width: 100%; 
-    max-width: 600px;
-    height: 300px; 
-    object-fit: cover; 
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.235); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@font-face {
+  font-family: "Star Jedi";
+  src: url("/docs/assets/fonts/Starjedi.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1 {
+  font-family: "Star Jedi", sans-serif;
+}
+
+.photo-grid-home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: stretch;
+  align-items: stretch;
+  padding: 20px;
+  row-gap: 50px;
+}
+
+.photo-grid-home img {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.235);
   position: relative;
-  }
-  
-  .image-container {
-    position: relative; /* Para posicionar el texto sobre la imagen */
-    width: 100%;
-    height: 300px; /* Igual que la altura de la imagen */
-    font-family: sans-serif;
-  }
+}
 
-  .text-overlay {
-    position: absolute;
-    bottom: 0; /* Fija la franja en la parte inferior */
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
-    color: white; /* Color blanco para el texto */
-    text-align: center;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: font-size 0.3s ease;
-  }
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  font-family: sans-serif;
+}
 
-  .image-container:hover .text-overlay {
-    font-size: 20px; /* Aumenta el tamaño del texto cuando pasas el cursor */
+.text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: font-size 0.3s ease;
+}
+
+.image-container:hover .text-overlay {
+  font-size: 20px;
+}
+
+/* Uso de flexbox para las tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente línea si no caben */
+  justify-content:flex-start;
+  gap: 30px; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  transition: transform 0.3s ease;
+  margin: 0;
+  width: calc(33.33% - 30px); 
+  min-width: 250px; 
+  box-sizing: border-box; 
+}
+
+
+.card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.card p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+.card:hover {
+  transform: scale(1.1); /* Aumenta el tamaño de la tarjeta un 10% */
+}
+
+/* Media Queries para pantallas medianas */
+@media (max-width: 1024px) {
+  .card {
+    width: calc(50% - 30px); /* 2 columnas en pantallas medianas */
   }
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 600px) {
+  .card {
+    width: 100%; /* 1 columna en pantallas pequeñas */
+  }
+}

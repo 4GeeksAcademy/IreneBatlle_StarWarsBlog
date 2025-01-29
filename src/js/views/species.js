@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { Context } from "../store/appContext.js";
 import "../../styles/index.css";
 
-const Species = () => {
+export const Species = () => {
 
     const { store, actions } = useContext(Context)
-    console.log(store.listContacts)
+
 
     // useEffect(() => {
 
@@ -18,4 +18,3 @@ const Species = () => {
         </div>
     )
 };
-export default Species;

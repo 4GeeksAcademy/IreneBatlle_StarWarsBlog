@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/index.css";
 import { Link, matchRoutes } from 'react-router-dom';
+import { Characters } from "./characters";
+import { Films } from "./films";
+import { Planets } from "./planets";
+import { Species } from "./species";
+import { Starships } from "./starships";
+import { Vehicles } from "./vehicles";
+
 
 export const Home = () => {
   // Categorías de imágenes
+  
   const getRandomImageCharacters = [
     "https://imagenes.20minutos.es/files/image_990_556/uploads/imagenes/2019/04/18/156382.jpg",
     "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/08/han-solo-star-wars.jpg",
-	"https://www.lavanguardia.com/files/image_449_220/uploads/2017/12/08/5fa3d8e24f841.jpeg",
-	"https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B0BDA09845AA575291C38D21E462571A6E07AC34899505FA6F6D615137B15EDF/scale?width=1200&aspectRatio=1.78&format=webp",
-	"https://preview.redd.it/ds4l7k9lt81b1.jpg?width=640&crop=smart&auto=webp&s=1b133d9f2876d616187efc408ea1670faeb37eb0",
-	"https://sm.ign.com/t/ign_latam/screenshot/default/aakin_h9w7.1280.jpg",
-	"https://lumiere-a.akamaihd.net/v1/images/din-djarin-the-mandalorian-main_38344f24.jpeg?region=106%2C64%2C1622%2C1215",
-	"https://img.asmedia.epimg.net/resizer/v2/UF2B2MQXURBHNPHQMHQYUZS56U.jpg?auth=a30e3d472a6cec07b696637606ddbd49d8a81d9005808074fe046c985332f047&width=1472&height=828&smart=true",
-	"https://lumiere-a.akamaihd.net/v1/images/Yoda-Retina_2a7ecc26.jpeg?region=0%2C0%2C1536%2C768",
-	"https://media.disneylandparis.com/d4th/es-es/images/n037183_2025feb27_world_the-mandalorian-grogu-characters-discoveryland_16-9_tcm797-256233.jpg",
-	"https://lumiere-a.akamaihd.net/v1/images/ahsoka-official-trailer-stills-08_2d5bc948.jpeg?region=0,0,1920,802",
-	"https://www.indiewire.com/wp-content/uploads/2019/12/ep3_ia_92696_r.jpg?w=600&h=337&crop=1",
-	"https://lumiere-a.akamaihd.net/v1/images/palpatine-return-of-the-jedi-tal_d881391a.jpeg",
-	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbOmrbSIoY8-j9MkbHT3rX-CPB2J6tXBYQVQ&s",
-	"https://lumiere-a.akamaihd.net/v1/images/chewie-main_e1968a8a.jpeg?region=0%2C0%2C716%2C536",
-	"https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/Poe-Dameron-Star-Wars-The-Rise-of-Skywalker.jpg",
-	"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/06/john-boyega-star-wars-finn-1958247.jpg",
+  "https://www.lavanguardia.com/files/image_449_220/uploads/2017/12/08/5fa3d8e24f841.jpeg",
+  "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/B0BDA09845AA575291C38D21E462571A6E07AC34899505FA6F6D615137B15EDF/scale?width=1200&aspectRatio=1.78&format=webp",
+  "https://preview.redd.it/ds4l7k9lt81b1.jpg?width=640&crop=smart&auto=webp&s=1b133d9f2876d616187efc408ea1670faeb37eb0",
+  "https://sm.ign.com/t/ign_latam/screenshot/default/aakin_h9w7.1280.jpg",
+  "https://lumiere-a.akamaihd.net/v1/images/din-djarin-the-mandalorian-main_38344f24.jpeg?region=106%2C64%2C1622%2C1215",
+  "https://img.asmedia.epimg.net/resizer/v2/UF2B2MQXURBHNPHQMHQYUZS56U.jpg?auth=a30e3d472a6cec07b696637606ddbd49d8a81d9005808074fe046c985332f047&width=1472&height=828&smart=true",
+  "https://lumiere-a.akamaihd.net/v1/images/Yoda-Retina_2a7ecc26.jpeg?region=0%2C0%2C1536%2C768",
+  "https://media.disneylandparis.com/d4th/es-es/images/n037183_2025feb27_world_the-mandalorian-grogu-characters-discoveryland_16-9_tcm797-256233.jpg",
+  "https://lumiere-a.akamaihd.net/v1/images/ahsoka-official-trailer-stills-08_2d5bc948.jpeg?region=0,0,1920,802",
+  "https://www.indiewire.com/wp-content/uploads/2019/12/ep3_ia_92696_r.jpg?w=600&h=337&crop=1",
+  "https://lumiere-a.akamaihd.net/v1/images/palpatine-return-of-the-jedi-tal_d881391a.jpeg",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbOmrbSIoY8-j9MkbHT3rX-CPB2J6tXBYQVQ&s",
+  "https://lumiere-a.akamaihd.net/v1/images/chewie-main_e1968a8a.jpeg?region=0%2C0%2C716%2C536",
+  "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/02/Poe-Dameron-Star-Wars-The-Rise-of-Skywalker.jpg",
+  "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/06/john-boyega-star-wars-finn-1958247.jpg",
   ];
 
   const getRandomImagePlanets = [
@@ -117,7 +125,7 @@ export const Home = () => {
 		</div>
          
 		<div className="image-container">
-		 <Link to="/characters">
+		 <Link to="/planets">
           <img
             src={getRandomImage(getRandomImagePlanets)}
             alt="Planets"

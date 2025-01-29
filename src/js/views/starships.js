@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 import { Context } from "../store/appContext.js";
 import "../../styles/index.css";
 
-const Starhips = () => {
+export const Starships = () => {
 
     const { store, actions } = useContext(Context)
-    console.log(store.listContacts)
 
     // useEffect(() => {
 
@@ -18,4 +17,3 @@ const Starhips = () => {
         </div>
     )
 };
-export default Starhips;
