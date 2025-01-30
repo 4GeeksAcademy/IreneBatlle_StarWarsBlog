@@ -1,19 +1,30 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { Link } from 'react-router-dom'
+import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import "../../styles/index.css";
+import { StarshipsCard } from "../component/starshipsCard"; 
+import getState from "../store/flux.js";
 
 export const Starships = () => {
+  const { store, actions } = useContext(Context);
 
-    const { store, actions } = useContext(Context)
+ // useEffect(() => {
+ //   actions.getAllStarships();
+ // }, [actions]);
 
-    // useEffect(() => {
-
-    // }, [])
-
+  if (!store.starships || store.starships.length === 0) {
     return (
-        <div>
-            Hola
+      <div>
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
-    )
+      </div>
+    );
+  }
+
+  return (
+    <div className="card-container">
+      {store.starships.map((starship) => (
+        <StarshipsCard key={starship.uid} uid={starship.uid} />
+      ))}
+    </div>
+  );
 };

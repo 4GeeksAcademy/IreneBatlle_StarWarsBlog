@@ -1,39 +1,31 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { PeopleCard } from "../component/peopleCard"; 
 import "../../styles/index.css";
 
 export const Characters = () => {
-  const { store, actions } = useContext(Context);
-  const [charactersList, setCharactersList] = useState([]);
-  const [loading, setLoading] = useState(true); 
-  
+  const { store, actions } = useContext(Context); 
 
-  useEffect(() => {
-    const fetchCharacters = async () => {
-      try {
-        const response = await fetch("https://swapi.tech/api/people/");
-        const data = await response.json();
-        setCharactersList(data.results); 
-        setLoading(false); 
-      } catch (error) {
-        console.error("Error loading characters", error);
-        setLoading(false);
-      }
-    };
+// useEffect(() => {
+//
+//   actions.getAllPeople();
+// }, [actions]);
+//
 
-    fetchCharacters();
-  }, []); 
-
-  if (loading) {
-    return <div><div class="spinner-border text-light" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div></div>; 
+  if (!store.people || store.people.length === 0) {
+    return (
+      <div>
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   }
+
 
   return (
     <div className="card-container">
-      {charactersList.map((character) => (
+      {store.people.map((character) => (
         <PeopleCard key={character.uid} uid={character.uid} />
       ))}
     </div>

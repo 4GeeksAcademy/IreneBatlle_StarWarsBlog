@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "..store/appContext.js"
+import { Context } from "../store/appContext.js"
 
 export const PlanetsCard = ({ uid }) => {
     const { actions } = useContext(Context);
     const [planets, setPlanets] = useState(null);
+  useEffect(() => {
+  
+    actions.getPlanet(uid).then(data => {
+      setPlanets(data);
+    }).catch(error => {
+      console.log("Error fetching the planet", error);
+    });
+  }, [uid]);
 
-    useEffect(() => {
-        const fetchPlanets = async () => {
-            try {
-                const data = await actions.getPlanets(uid);
-                setPlanets(data);
-            } catch (error) {
-                console.log("Error fetching the planets", error)
-            }
-        }
-        fetchPlanets();
-    }, [uid])
 
     if (!planets) return <div class="spinner-border text-light" role="status">
     <span class="visually-hidden"style={{justifySelf:"center"}}>Loading...</span>
@@ -23,17 +20,21 @@ export const PlanetsCard = ({ uid }) => {
 
     return (
         <div className="card" style={{ width: "20rem" }}>
-        <img className="card-img-top"></img>
+      <img
+        className="card-img-top"
+        src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`}
+        alt={planets.properties.name}
+      />
         <div className="card-body">
             <h3 className="card-title">{planets.properties.name}</h3>
-            <p className="card-text">{planets.properties.population}</p>
-            <p className="card-text">{planets.properties.diameter}</p>
-            <p className="card-text">{planets.properties.climate}</p>
-            <p className="card-text">{planets.properties.terrain }</p>
+            <p className="card-text">Population: {planets.properties.population}</p>
+            <p className="card-text">Diameter: {planets.properties.diameter}</p>
+            <p className="card-text">Climate: {planets.properties.climate}</p>
+            <p className="card-text">Terrain: {planets.properties.terrain }</p>
             <div>
                 <button className="btn btn-outline-light">See more</button>
                 <button className="btn btn-outline-light">
-                    <i class="fa-regular fa-heart"></i>
+                    <i className="fa-regular fa-heart"></i>
                 </button>
             </div>
             </div></div>

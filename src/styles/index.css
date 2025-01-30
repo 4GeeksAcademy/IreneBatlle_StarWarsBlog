@@ -99,12 +99,12 @@ h1 {
   font-size: 20px;
 }
 
-/* Uso de flexbox para las tarjetas */
+
 .card-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se muevan a la siguiente línea si no caben */
-  justify-content:flex-start;
-  gap: 30px; 
+  flex-wrap: wrap; 
+  justify-content:center;
+  gap: 50px; 
   padding: 20px;
   box-sizing: border-box;
 }
@@ -117,9 +117,9 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   text-align: left;
   transition: transform 0.3s ease;
-  margin: 0;
-  width: calc(33.33% - 30px); 
-  min-width: 250px; 
+  margin: auto;
+  width: calc(33.3% - 30px); 
+  min-width: 400px; 
   box-sizing: border-box; 
 }
 
@@ -140,20 +140,21 @@ h1 {
   font-size: 1rem;
   margin: 5px 0;
 }
+
 .card:hover {
-  transform: scale(1.1); /* Aumenta el tamaño de la tarjeta un 10% */
+  transform: scale(1.05); 
 }
 
-/* Media Queries para pantallas medianas */
+
 @media (max-width: 1024px) {
   .card {
-    width: calc(50% - 30px); /* 2 columnas en pantallas medianas */
+    width: calc(50% - 30px);
   }
 }
 
-/* Media Queries para pantallas pequeñas */
+
 @media (max-width: 600px) {
   .card {
-    width: 100%; /* 1 columna en pantallas pequeñas */
+    width: 100%; 
   }
 }
