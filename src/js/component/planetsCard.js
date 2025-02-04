@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js"
+import { Link } from 'react-router-dom'
 
 export const PlanetsCard = ({ uid }) => {
     const { actions } = useContext(Context);
@@ -32,7 +33,9 @@ export const PlanetsCard = ({ uid }) => {
             <p className="card-text">Climate: {planets.properties.climate}</p>
             <p className="card-text">Terrain: {planets.properties.terrain }</p>
             <div>
+            <Link to={`/planets/${uid}`}>
                 <button className="btn btn-outline-light">See more</button>
+                </Link>
                 <button className="btn btn-outline-light">
                     <i className="fa-regular fa-heart"></i>
                 </button>

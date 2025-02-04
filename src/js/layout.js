@@ -10,6 +10,7 @@ import { Planets } from "./views/planets";
 import { Species } from "./views/species";
 import { Starships } from "./views/starships";
 import { Vehicles } from "./views/vehicles";
+import { PlanetInfo } from "./views/planetsPage";
 
 
 
@@ -33,6 +34,8 @@ const Layout = () => {
 						<Route path="/starships" element={<Starships />} />
 						<Route path="/vehicles" element={<Vehicles />} />
 						<Route path="/planets" element={<Planets />} />
+						<Route path="/planets/:uid" element={<PlanetInfo />} />
+						
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />
