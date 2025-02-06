@@ -51,7 +51,7 @@ export const SpeciesCard = ({ uid }) => {
         <p className="card-text">Classification: {species.properties.classification}</p>
         <p className="card-text">Designation: {species.properties.designation}</p>
         <p className="card-text">Average height: {species.properties.average_height} cm</p>
-        <p className="card-text">Average lifespan: {species.properties.average_lifespan}</p>
+        <p className="card-text">Average lifespan: {species.properties.average_lifespan} years</p>
         <div className="d-flex justify-content-between">
           <Link to={`/species/${uid}`}>
             <button className="btn btn-outline-light">See more</button>

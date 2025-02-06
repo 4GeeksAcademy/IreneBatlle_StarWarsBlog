@@ -4,8 +4,9 @@ import { Context } from "../store/appContext.js";
 
 export const VehicleInfo = () => {
     const { uid } = useParams();
-    const { actions } = useContext(Context);
+    const { actions } = useContext(Context); 
     const [vehicle, setVehicle] = useState(null);
+
 
     useEffect(() => {
         actions.getVehicles(uid)
@@ -15,7 +16,11 @@ export const VehicleInfo = () => {
             .catch(error => {
                 console.log("Error fetching the vehicle", error);
             });
-    }, [uid, actions]);
+
+
+    }, [uid,actions]); 
+
+
 
     if (!vehicle) {
         return (
@@ -32,26 +37,25 @@ export const VehicleInfo = () => {
             <img
                 className="card-img-top"
                 src={`https://starwars-visualguide.com/assets/img/vehicles/${uid}.jpg`}
-                alt={vehicles.properties.name}
+                alt={vehicle.properties.name}
             />
             <div className="card-body">
-                <h3 className="card-title">{vehicles.properties.name}</h3>
-                <p className="card-text">Class: {vehicles.properties.vehicle_class}</p>
-                <p className="card-text">Model: {vehicles.properties.model}</p>
-                <p className="card-text">Manufacturer: {vehicles.properties.manufacturer}</p>
-                <p className="card-text">Cost: {vehicles.properties.cost_in_credits} credits</p>
-                <p className="card-text">Max speed: {vehicles.properties.max_atmosphering_speed}</p>
-                <p className="card-text">Length: {vehicles.properties.length}m</p>
-                <p className="card-text">Crew: {vehicles.properties.crew}</p>
-                <p className="card-text">Passengers: {vehicles.properties.passengers}</p>
-                <p className="card-text">Cargo capacity: {vehicles.properties.cargo_capacity}kg</p>
-                <p className="card-text">Consumables : {vehicles.properties.consumables }</p>
-                <p className="card-text">Films: {vehicles.properties.films?.join(", ") || "N/A"}</p>
-                <p className="card-text">Pilots : {vehicles.properties.pilots?.join(", ") || "N/A"}</p>
+                <h3 className="card-title">{vehicle.properties.name}</h3>
+                <p className="card-text">Class: {vehicle.properties.vehicle_class}</p>
+                <p className="card-text">Model: {vehicle.properties.model}</p>
+                <p className="card-text">Manufacturer: {vehicle.properties.manufacturer}</p>
+                <p className="card-text">Cost: {vehicle.properties.cost_in_credits} credits</p>
+                <p className="card-text">Max speed: {vehicle.properties.max_atmosphering_speed}</p>
+                <p className="card-text">Length: {vehicle.properties.length}m</p>
+                <p className="card-text">Crew: {vehicle.properties.crew}</p>
+                <p className="card-text">Passengers: {vehicle.properties.passengers}</p>
+                <p className="card-text">Cargo capacity: {vehicle.properties.cargo_capacity}kg</p>
+                <p className="card-text">Consumables: {vehicle.properties.consumables}</p>
+                <p className="card-text">Films: {vehicle.properties.films?.join(", ") || "N/A"}</p>
+                <p className="card-text">Pilots: {vehicle.properties.pilots?.join(", ") || "N/A"}</p>
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-outline-light">See more</button>
-                    <button className="btn btn-outline-light">
-                        <i className="fa-regular fa-heart"></i>
+                    <button className="btn btn-outline-light" onClick={handleFavoriteToggle}>
+                        <i className={`fa${isFavorite ? "s" : "r"} fa-heart`}></i> 
                     </button>
                 </div>
             </div>

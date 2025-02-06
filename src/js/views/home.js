@@ -7,6 +7,7 @@ import { Planets } from "./planets";
 import { Species } from "./species";
 import { Starships } from "./starships";
 import { Vehicles } from "./vehicles";
+import { Sidebar } from "../component/sidebar";
 
 
 export const Home = () => {
@@ -71,6 +72,15 @@ export const Home = () => {
             alt="Films"
           />
 		  <div className="text-overlay">Films</div>
+        </Link>
+		</div>
+    <div className="image-container" style={{ justifySelf: "center" }}>
+		<Link to="/favorites">
+          <img
+            src="https://www.slashfilm.com/img/gallery/leia-hugging-rey-jj-abrams-force-awakens/intro-import.jpg"
+            alt="Favorites"
+          />
+		  <div className="text-overlay">Favorites</div>
         </Link>
 		</div>
       </div>

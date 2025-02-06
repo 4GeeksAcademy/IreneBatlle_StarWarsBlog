@@ -7,10 +7,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 			planets: [],
 			starships: [],
 			vehicles: [],
+			favorites: [],
 
 		},
 
 		actions: {
+			addToFavorites: (item, type) => {
+				const store = getStore();
+				const itemWithType = { ...item, type }; // Agregar el tipo al objeto
+				const isAlreadyFavorite = store.favorites.some(
+					(fav) => fav.uid === itemWithType.uid && fav.type === itemWithType.type
+				);
+			
+				if (!isAlreadyFavorite) {
+					setStore({
+						favorites: [...store.favorites, itemWithType]
+					});
+				}
+			},
+			
+		
+			removeFromFavorites: (uid, type) => {
+				const store = getStore();
+				setStore({
+					favorites: store.favorites.filter((fav) => fav.uid !== uid || fav.type !== type)
+				});
+			},
+			
 			getAllPeople: async () => {
 				try {
 				  const response = await fetch("https://www.swapi.tech/api/people/");

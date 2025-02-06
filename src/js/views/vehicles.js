@@ -1,30 +1,31 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import "../../styles/index.css";
-import { VehiclesCard } from "../component/vehiclesCard"; 
+import { VehiclesCard } from "../component/vehiclesCard";
 
 export const Vehicles = () => {
+    const { store, actions } = useContext(Context);
 
-    const { store, actions } = useContext(Context)
+    useEffect(() => {
+        // Llamar la acción para obtener todos los vehículos
+        actions.getAllVehicles();
+    }, [actions]);
 
+    if (!store.vehicles || store.vehicles.length === 0) {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
-  if (!store.planets || store.planets.length === 0) {
     return (
-      <div>
-        <div className="spinner-border text-light" role="status">
-          <span className="visually-hidden">Loading...</span>
+        <div className="card-container">
+            {store.vehicles.map((vehicle) => (
+                <VehiclesCard key={vehicle.uid} uid={vehicle.uid} />
+            ))}
         </div>
-      </div>
     );
-  }
-
-
-  return (
-    <div className="card-container">
-      {store.vehicles.map((vehicle) => (
-        <VehiclesCard key={vehicle.uid} uid={vehicle.uid} />
-      ))}
-    </div>
-  );
 };

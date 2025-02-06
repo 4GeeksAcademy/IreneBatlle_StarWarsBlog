@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 export const PeopleCard = ({ uid }) => {
   const { actions, store } = useContext(Context);
   const [people, setPeople] = useState(null);
-  const [homeworld, setHomeworld] = useState("Loading...")
+  const [homeworld, setHomeworld] = useState("Loading...");
+  const [species, setSpecies] = useState("Loading...");
 
   const findHomeworld = () => {
     const urldividida = people.properties.homeworld.split("/");
@@ -15,6 +16,16 @@ export const PeopleCard = ({ uid }) => {
       setHomeworld(planeta.name);
     } else {
       setHomeworld("Unknown")
+    }
+  }
+  const findSpecies = () => {
+    const urldividida2 = people.properties.species.split("/");
+    const id = urldividida2[urldividida2.length - 1];
+    const especie = store.species.find((species) => species.uid == id);
+    if (especie) {
+      setSpecies(especie.name);
+    } else {
+      setSpecies("Unknown")
     }
   }
 
@@ -30,6 +41,9 @@ export const PeopleCard = ({ uid }) => {
   useEffect(() => {
     if (people && store.planets.length > 0) {
       findHomeworld();
+    }
+    else if (people && store.species.length > 0) {
+      findSpecies();
     }
   }, [people]);
 
@@ -47,7 +61,7 @@ export const PeopleCard = ({ uid }) => {
       />
       <div className="card-body">
         <h3 className="card-title">{people.properties.name}</h3>
-        <p className="card-text">Species: {people.properties.species}</p>
+        <p className="card-text">Species: {species}</p>
         <p className="card-text">Gender: {people.properties.gender}</p>
         <p className="card-text">Birth year: {people.properties.birth_year}</p>
         <p className="card-text">Origin: {homeworld}</p>
