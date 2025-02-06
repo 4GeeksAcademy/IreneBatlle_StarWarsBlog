@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js"
+import { Link } from 'react-router-dom'
 
 export const FilmsCard = ({ uid }) => {
     const { actions } = useContext(Context);
@@ -31,8 +32,10 @@ export const FilmsCard = ({ uid }) => {
             <p className="card-text">Episode {films.properties.episode_id}</p>
             <p className="card-text">Directed by {films.properties.director}</p>
             <p className="card-text">Release date: {films.properties.release_date}</p>
-            <div>
-                <button className="btn btn-outline-light">See more</button>
+            <div className="d-flex justify-content-between">
+            <Link to={`/films/${uid}`}>
+              <button className="btn btn-outline-light">See more</button>
+            </Link>
                 <button className="btn btn-outline-light">
                     <i class="fa-regular fa-heart"></i>
                 </button>

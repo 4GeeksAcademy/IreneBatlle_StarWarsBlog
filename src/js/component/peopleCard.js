@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from 'react-router-dom'
 
 export const PeopleCard = ({ uid }) => {
   const { actions, store } = useContext(Context);
@@ -10,15 +11,15 @@ export const PeopleCard = ({ uid }) => {
     const urldividida = people.properties.homeworld.split("/");
     const id = urldividida[urldividida.length - 1];
     const planeta = store.planets.find((planet) => planet.uid == id);
-    if (planeta){
+    if (planeta) {
       setHomeworld(planeta.name);
     } else {
       setHomeworld("Unknown")
     }
   }
-  
+
   useEffect(() => {
-  
+
     actions.getPeople(uid).then(data => {
       setPeople(data);
     }).catch(error => {
@@ -27,12 +28,12 @@ export const PeopleCard = ({ uid }) => {
   }, [uid]);
 
   useEffect(() => {
-    if (people&&store.planets.length>0){
+    if (people && store.planets.length > 0) {
       findHomeworld();
     }
   }, [people]);
-  
-  if (!people) return <div className="spinner-border text-light" role="status"  style={{ justifySelf: "center" }}>
+
+  if (!people) return <div className="spinner-border text-light" role="status" style={{ justifySelf: "center" }}>
     <span class="visually-hidden">Loading...</span>
   </div>;
 
@@ -50,15 +51,17 @@ export const PeopleCard = ({ uid }) => {
         <p className="card-text">Gender: {people.properties.gender}</p>
         <p className="card-text">Birth year: {people.properties.birth_year}</p>
         <p className="card-text">Origin: {homeworld}</p>
-        <div>
-          <div style={{ justifyContent: "space-between" }}>
-            <button className="btn btn-outline-light">See more</button>
+
+        <div className="d-flex justify-content-between">
+            <Link to={`/characters/${uid}`}>
+              <button className="btn btn-outline-light">See more</button>
+            </Link>
             <button className="btn btn-outline-light">
               <i className="fa-regular fa-heart"></i>
             </button>
           </div>
         </div>
       </div>
-    </div>
+
   );
 };

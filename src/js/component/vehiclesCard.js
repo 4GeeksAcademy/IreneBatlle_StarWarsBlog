@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js"
+import { Link } from 'react-router-dom'
 
 export const VehiclesCard = ({ uid }) => {
     const { actions } = useContext(Context);
@@ -33,7 +34,7 @@ export const VehiclesCard = ({ uid }) => {
                 <p className="card-text">Manufacturer: {vehicles.properties.manufacturer}</p>
                 <p className="card-text">Cost: {vehicles.properties.cost_in_credits} credits</p>
                 <p className="card-text">Max. speed: {vehicles.properties.max_atmosphering_speed} km/h</p>
-                <div>
+                <div className="d-flex justify-content-between">
                     <button className="btn btn-outline-light">See more</button>
                     <button className="btn btn-outline-light">
                         <i className="fa-regular fa-heart"></i>
