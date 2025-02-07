@@ -10,13 +10,14 @@ export const CharacterInfo = () => {
     useEffect(() => {
         actions.getPeople(uid) 
             .then(data => {
-                setPeople(data.result); 
+                console.log(data)
+                setPeople(data); 
             })
             .catch(error => {
                 console.log("Error fetching the character", error);
             });
     }, [uid, actions]);
-
+console.log(people)
     if (!people) {
         return (
             <div className="d-flex justify-content-center">
@@ -39,7 +40,7 @@ export const CharacterInfo = () => {
                 <p className="card-text">Birth year: {people.properties.birth_year}</p>
                 <p className="card-text">Gender: {people.properties.gender}</p>
                 <p className="card-text">Species: {people.properties.species?.join(", ") || "N/A"}</p>
-                <p className="card-text">Homeworld : {people.properties.homeworld}%</p>
+                <p className="card-text">Homeworld : {people.properties.homeworld}</p>
                 <p className="card-text">Eye color: {people.properties.eye_color}</p>
                 <p className="card-text">Hair color: {people.properties.hair_color}</p>
                 <p className="card-text">Height: {people.properties.height}cm</p>

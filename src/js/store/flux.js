@@ -12,26 +12,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			addToFavorites: (item, type) => {
+			addToFavorites: (item) => {
+				console.log(item)
 				const store = getStore();
-				const itemWithType = { ...item, type }; // Agregar el tipo al objeto
-				const isAlreadyFavorite = store.favorites.some(
-					(fav) => fav.uid === itemWithType.uid && fav.type === itemWithType.type
-				);
-			
+				const isAlreadyFavorite = store.favorites.includes(item);
 				if (!isAlreadyFavorite) {
 					setStore({
-						favorites: [...store.favorites, itemWithType]
+						favorites: [...store.favorites, item]
 					});
 				}
 			},
 			
 		
 			removeFromFavorites: (uid, type) => {
+				console.log(typeof uid, typeof type)
 				const store = getStore();
-				setStore({
-					favorites: store.favorites.filter((fav) => fav.uid !== uid || fav.type !== type)
-				});
+				const newFavorites=store.favorites.filter((fav) => (fav.uid != uid && fav.type != type))
+				console.log(newFavorites)
+				//setStore({
+				//	favorites: store.favorites.filter((fav) => fav.uid !== uid && fav.type !== type)
+				//});
 			},
 			
 			getAllPeople: async () => {
