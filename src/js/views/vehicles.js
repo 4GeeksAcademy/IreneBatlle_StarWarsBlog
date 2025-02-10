@@ -6,11 +6,11 @@ import { VehiclesCard } from "../component/vehiclesCard";
 export const Vehicles = () => {
     const { store, actions } = useContext(Context);
 
-    useEffect(() => {
-        // Llamar la acción para obtener todos los vehículos
-        actions.getAllVehicles();
-    }, [actions]);
-console.log(store.favorites)
+//    useEffect(() => {
+//        // Llamar la acción para obtener todos los vehículos
+//        actions.getAllVehicles();
+//    }, [actions]);
+//console.log(store.favorites)
     if (!store.vehicles || store.vehicles.length === 0) {
         return (
             <div className="d-flex justify-content-center">

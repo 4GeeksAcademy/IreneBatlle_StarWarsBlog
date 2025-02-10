@@ -25,13 +25,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 		
 			removeFromFavorites: (uid, type) => {
-				console.log(typeof uid, typeof type)
+				console.log(uid, type)
 				const store = getStore();
-				const newFavorites=store.favorites.filter((fav) => (fav.uid != uid && fav.type != type))
+				const newFavorites = store.favorites.filter((fav) => !(fav.uid === uid && fav.type === type))
 				console.log(newFavorites)
-				//setStore({
-				//	favorites: store.favorites.filter((fav) => fav.uid !== uid && fav.type !== type)
-				//});
+				setStore({
+					favorites: newFavorites
+				});
 			},
 			
 			getAllPeople: async () => {
