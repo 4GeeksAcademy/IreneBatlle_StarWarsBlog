@@ -6,6 +6,7 @@ export const SpeciesCard = ({ uid }) => {
   const { actions, store } = useContext(Context);
   const [species, setSpecies] = useState(null);
   const [homeworld, setHomeworld] = useState("Loading...")
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const findHomeworld = () => {
     const urldividida = species.properties.homeworld.split("/");
@@ -34,6 +35,22 @@ export const SpeciesCard = ({ uid }) => {
     }
   }, [species]);
 
+  useEffect(() => {
+    const favorite = store.favorites.find(fav => fav.uid === uid && fav.type === "species");
+    setIsFavorite(favorite ? true : false);
+  }, [uid, store.favorites]);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      actions.removeFromFavorites(uid, "species");
+    } else {
+      const speciesData = species.properties;
+      actions.addToFavorites({ ...speciesData, uid, type: "species" });
+    }
+    setIsFavorite(!isFavorite);
+  };
+
+
   if (!species) return <div class="spinner-border text-light" role="status">
     <span class="visually-hidden" style={{ justifySelf: "center" }}>Loading...</span>
   </div>;
@@ -56,8 +73,8 @@ export const SpeciesCard = ({ uid }) => {
           <Link to={`/species/${uid}`}>
             <button className="btn btn-outline-light">See more</button>
           </Link>
-          <button className="btn btn-outline-light">
-            <i className="fa-regular fa-heart"></i>
+          <button className="btn btn-outline-light" onClick={handleFavorite}>
+            <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i>
           </button>
         </div>
       </div>

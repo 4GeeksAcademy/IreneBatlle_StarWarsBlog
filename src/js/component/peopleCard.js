@@ -6,7 +6,8 @@ export const PeopleCard = ({ uid }) => {
   const { actions, store } = useContext(Context);
   const [people, setPeople] = useState(null);
   const [homeworld, setHomeworld] = useState("Loading...");
-  const [species, setSpecies] = useState("Loading...");
+      const [isFavorite, setIsFavorite] = useState(false); 
+  //const [species, setSpecies] = useState("Loading...");
 
   const findHomeworld = () => {
     const urldividida = people.properties.homeworld.split("/");
@@ -18,16 +19,16 @@ export const PeopleCard = ({ uid }) => {
       setHomeworld("Unknown")
     }
   }
-  const findSpecies = () => {
-    const urldividida2 = people.properties.species.split("/");
-    const id = urldividida2[urldividida2.length - 1];
-    const especie = store.species.find((species) => species.uid == id);
-    if (especie) {
-      setSpecies(especie.name);
-    } else {
-      setSpecies("Unknown")
-    }
-  }
+ //const findSpecies = () => {
+ //  const urldividida2 = people.properties.species.split("/");
+ //  const id = urldividida2[urldividida2.length - 1];
+ //  const especie = store.species.find((species) => species.uid == id);
+ //  if (especie) {
+ //    setSpecies(especie.name);
+ //  } else {
+ //    setSpecies("Unknown")
+ //  }
+ //}
 
   useEffect(() => {
 
@@ -42,10 +43,20 @@ export const PeopleCard = ({ uid }) => {
     if (people && store.planets.length > 0) {
       findHomeworld();
     }
-    else if (people && store.species.length > 0) {
-      findSpecies();
-    }
+    //else if (people && store.species.length > 0) {
+    //  findSpecies();
+    //}
   }, [people]);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+        actions.removeFromFavorites(uid, "characters");  
+    } else {
+        const peopleData = people.properties;
+        actions.addToFavorites({ ...peopleData, uid, type: "characters" });  
+    }
+    setIsFavorite(!isFavorite); 
+};
 
   if (!people) return <div className="spinner-border text-light" role="status" style={{ justifySelf: "center" }}>
     <span class="visually-hidden">Loading...</span>
@@ -61,7 +72,7 @@ export const PeopleCard = ({ uid }) => {
       />
       <div className="card-body">
         <h3 className="card-title">{people.properties.name}</h3>
-        <p className="card-text">Species: {species}</p>
+        {/*<p className="card-text">Species: {species}</p>*/}
         <p className="card-text">Gender: {people.properties.gender}</p>
         <p className="card-text">Birth year: {people.properties.birth_year}</p>
         <p className="card-text">Origin: {homeworld}</p>
@@ -70,8 +81,8 @@ export const PeopleCard = ({ uid }) => {
             <Link to={`/characters/${uid}`}>
               <button className="btn btn-outline-light">See more</button>
             </Link>
-            <button className="btn btn-outline-light">
-              <i className="fa-regular fa-heart"></i>
+            <button className="btn btn-outline-light" onClick={handleFavorite}>
+            <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i>
             </button>
           </div>
         </div>

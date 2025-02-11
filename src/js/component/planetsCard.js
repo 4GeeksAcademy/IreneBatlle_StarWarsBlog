@@ -3,8 +3,10 @@ import { Context } from "../store/appContext.js"
 import { Link } from 'react-router-dom'
 
 export const PlanetsCard = ({ uid }) => {
-  const { actions } = useContext(Context);
+  const { actions, store } = useContext(Context);
   const [planets, setPlanets] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   useEffect(() => {
 
     actions.getPlanet(uid).then(data => {
@@ -13,6 +15,22 @@ export const PlanetsCard = ({ uid }) => {
       console.log("Error fetching the planet", error);
     });
   }, [uid]);
+
+  useEffect(() => {
+    const favorite = store.favorites.find(fav => fav.uid === uid && fav.type === "planets");
+    setIsFavorite(favorite ? true : false);
+  }, [uid, store.favorites]);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      actions.removeFromFavorites(uid, "planets");
+    } else {
+      const planetData = planets.properties;
+      actions.addToFavorites({ ...planetData, uid, type: "planets" });
+    }
+    setIsFavorite(!isFavorite);
+  };
+
 
 
   if (!planets) return <div class="spinner-border text-light" role="status">
@@ -36,8 +54,8 @@ export const PlanetsCard = ({ uid }) => {
           <Link to={`/planets/${uid}`}>
             <button className="btn btn-outline-light">See more</button>
           </Link>
-          <button className="btn btn-outline-light">
-            <i className="fa-regular fa-heart"></i>
+          <button className="btn btn-outline-light" onClick={handleFavorite}>
+            <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i>
           </button>
         </div>
       </div></div>

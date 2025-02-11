@@ -3,8 +3,9 @@ import { Context } from "../store/appContext.js"
 import { Link } from 'react-router-dom'
 
 export const StarshipsCard = ({ uid }) => {
-  const { actions } = useContext(Context);
+  const { actions, store } = useContext(Context);
   const [starships, setStarships] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     actions.getStarship(uid).then(data => {
@@ -13,6 +14,21 @@ export const StarshipsCard = ({ uid }) => {
       console.log("Error fetching the starhip", error);
     });
   }, [uid, actions]);
+
+  useEffect(() => {
+    const favorite = store.favorites.find(fav => fav.uid === uid && fav.type === "starships");
+    setIsFavorite(favorite ? true : false);
+  }, [uid, store.favorites]);
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      actions.removeFromFavorites(uid, "starships");
+    } else {
+      const starshipData = starships.properties;
+      actions.addToFavorites({ ...starshipData, uid, type: "starships" });
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   if (!starships) return <div class="spinner-border text-light" role="status">
     <span class="visually-hidden" style={{ justifySelf: "center" }}>Loading...</span>
@@ -28,7 +44,6 @@ export const StarshipsCard = ({ uid }) => {
       />
       <div className="card-body">
         <h3 className="card-title">{starships.properties.name}</h3>
-        <p className="card-text">Class: {starships.properties.vehicle_class}</p>
         <p className="card-text">Model: {starships.properties.model}</p>
         <p className="card-text">Manufacturer: {starships.properties.manufacturer}</p>
         <p className="card-text">Cost: {starships.properties.cost_in_credits} credits</p>
@@ -37,8 +52,8 @@ export const StarshipsCard = ({ uid }) => {
           <Link to={`/starhips/${uid}`}>
             <button className="btn btn-outline-light">See more</button>
           </Link>
-          <button className="btn btn-outline-light">
-            <i className="fa-regular fa-heart"></i>
+          <button className="btn btn-outline-light" onClick={handleFavorite}>
+            <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i>
           </button>
         </div>
       </div>

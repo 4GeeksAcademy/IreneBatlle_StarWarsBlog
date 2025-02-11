@@ -3,9 +3,9 @@ import { Context } from "../store/appContext.js";
 import { Link } from 'react-router-dom';
 
 export const VehiclesCard = ({ uid }) => {
-    const { actions, store } = useContext(Context);  
+    const { actions, store } = useContext(Context);
     const [vehicles, setVehicles] = useState(null);
-    const [isFavorite, setIsFavorite] = useState(false); 
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
 
@@ -14,22 +14,22 @@ export const VehiclesCard = ({ uid }) => {
         }).catch(error => {
             console.log("Error fetching the vehicle", error);
         });
-    }, [uid, actions]); 
+    }, [uid, actions]);
 
 
     useEffect(() => {
         const favorite = store.favorites.find(fav => fav.uid === uid && fav.type === "vehicles");
-        setIsFavorite(favorite ? true : false);  
-    }, [uid, store.favorites]); 
+        setIsFavorite(favorite ? true : false);
+    }, [uid, store.favorites]);
 
     const handleFavorite = () => {
         if (isFavorite) {
-            actions.removeFromFavorites(uid, "vehicles");  
+            actions.removeFromFavorites(uid, "vehicles");
         } else {
             const vehicleData = vehicles.properties;
-            actions.addToFavorites({ ...vehicleData, uid, type: "vehicles" });  
+            actions.addToFavorites({ ...vehicleData, uid, type: "vehicles" });
         }
-        setIsFavorite(!isFavorite); 
+        setIsFavorite(!isFavorite);
     };
 
     if (!vehicles) return <div className="spinner-border text-light" role="status">
@@ -55,7 +55,7 @@ export const VehiclesCard = ({ uid }) => {
                         <button className="btn btn-outline-light">See more</button>
                     </Link>
                     <button className="btn btn-outline-light" onClick={handleFavorite}>
-                        <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i> {/* Cambiar el ícono según el estado */}
+                        <i className={`fa-${isFavorite ? 'solid' : 'regular'} fa-heart`}></i>
                     </button>
                 </div>
             </div>

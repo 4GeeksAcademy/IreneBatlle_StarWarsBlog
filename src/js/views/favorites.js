@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import "../../styles/index.css";
+import { FavoritesCard } from "../component/favoritesCard.js";
 
 export const Favorites = () => {
-  const { store, actions } = useContext(Context);
+  const { store } = useContext(Context);
 
   if (!store.favorites || store.favorites.length === 0) {
     return (
@@ -17,7 +18,9 @@ export const Favorites = () => {
 
   return (
     <div className="card-container">
-Hola
+      {store.favorites.map((item) => (
+        <FavoritesCard key={item.uid} uid={item.uid} type={item.type} name={item.name} />
+      ))}
     </div>
   );
 };

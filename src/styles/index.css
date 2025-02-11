@@ -153,6 +153,7 @@ body {
   align-items: start; /* Alineación vertical */
   padding: 20px;
   box-sizing: border-box;
+  
 }
 
 /* Si hay un séptimo elemento (último en la fila incompleta), centrarlo */
@@ -177,10 +178,12 @@ body {
 
 .card-img {
   width: 100%;
-  height: 150px;
+  height: auto;
+  max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
 }
+
 
 .card h3 {
   font-size: 1.5rem;
