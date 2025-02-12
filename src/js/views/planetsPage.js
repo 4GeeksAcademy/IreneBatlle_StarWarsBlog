@@ -10,12 +10,12 @@ export const PlanetInfo = () => {
     useEffect(() => {
         actions.getPlanet(uid) 
             .then(data => {
-                setPlanet(data.result); 
+                setPlanet(data); 
             })
             .catch(error => {
                 console.log("Error fetching the planet", error);
             });
-    }, [uid, actions]);
+    }, [uid]);
 
     if (!planet) {
         return (
@@ -28,7 +28,7 @@ export const PlanetInfo = () => {
     }
 
     return (
-        <div className="card" style={{ width: "20rem", margin: "auto" }}>
+        <div className="card" style={{ width: "60rem", margin: "auto" }}>
             <img
                 className="card-img-top"
                 src={`https://starwars-visualguide.com/assets/img/planets/${uid}.jpg`}
@@ -44,14 +44,7 @@ export const PlanetInfo = () => {
                 <p className="card-text">Climate: {planet.properties.climate}</p>
                 <p className="card-text">Terrain: {planet.properties.terrain}</p>
                 <p className="card-text">Surface water: {planet.properties.surface_water}%</p>
-                <p className="card-text">Residents: {planet.properties.residents?.join(", ") || "N/A"}</p>
-                <p className="card-text">Films: {planet.properties.films?.join(", ") || "N/A"}</p>
-                <div className="d-flex justify-content-between">
-                    <button className="btn btn-outline-light">See more</button>
-                    <button className="btn btn-outline-light">
-                        <i className="fa-regular fa-heart"></i>
-                    </button>
-                </div>
+
             </div>
         </div>
     );

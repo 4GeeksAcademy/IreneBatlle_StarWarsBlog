@@ -49,7 +49,7 @@ export const StarshipsCard = ({ uid }) => {
         <p className="card-text">Cost: {starships.properties.cost_in_credits} credits</p>
         <p className="card-text">Max speed: {starships.properties.max_atmosphering_speed}</p>
         <div className="d-flex justify-content-between">
-          <Link to={`/starhips/${uid}`}>
+          <Link to={`/starships/${uid}`}>
             <button className="btn btn-outline-light">See more</button>
           </Link>
           <button className="btn btn-outline-light" onClick={handleFavorite}>

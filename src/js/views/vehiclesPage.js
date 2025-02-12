@@ -18,7 +18,7 @@ export const VehicleInfo = () => {
             });
 
 
-    }, [uid,actions]); 
+    }, [uid]); 
 
 
 
@@ -51,13 +51,7 @@ export const VehicleInfo = () => {
                 <p className="card-text">Passengers: {vehicle.properties.passengers}</p>
                 <p className="card-text">Cargo capacity: {vehicle.properties.cargo_capacity}kg</p>
                 <p className="card-text">Consumables: {vehicle.properties.consumables}</p>
-                <p className="card-text">Films: {vehicle.properties.films?.join(", ") || "N/A"}</p>
-                <p className="card-text">Pilots: {vehicle.properties.pilots?.join(", ") || "N/A"}</p>
-                <div className="d-flex justify-content-between">
-                    <button className="btn btn-outline-light" onClick={handleFavoriteToggle}>
-                        <i className={`fa${isFavorite ? "s" : "r"} fa-heart`}></i> 
-                    </button>
-                </div>
+
             </div>
         </div>
     );

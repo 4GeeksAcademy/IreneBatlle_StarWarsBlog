@@ -10,12 +10,12 @@ export const SpeciesInfo = () => {
     useEffect(() => {
         actions.getSpecies(uid)
             .then(data => {
-                setSpecies(data.result);
+                setSpecies(data);
             })
             .catch(error => {
                 console.log("Error fetching the species", error);
             });
-    }, [uid, actions]);
+    }, [uid]);
 
     if (!species) {
         return (
@@ -28,7 +28,7 @@ export const SpeciesInfo = () => {
     }
 
     return (
-        <div className="card" style={{ width: "20rem", margin: "auto" }}>
+        <div className="card" style={{ width: "60rem", margin: "auto" }}>
             <img
                 className="card-img-top"
                 src={`https://starwars-visualguide.com/assets/img/species/${uid}.jpg`}
@@ -46,14 +46,7 @@ export const SpeciesInfo = () => {
                 <p className="card-text">Language: {species.properties.language }</p>
                 <p className="card-text">Homeworld: {species.properties.homeworld }</p>
                 <p className="card-text">Consumables: {species.properties.consumables }</p>
-                <p className="card-text">People: {species.properties.people ?.join(", ") || "N/A"}</p>
-                <p className="card-text">Films: {species.properties.films?.join(", ") || "N/A"}</p>
-                <div className="d-flex justify-content-between">
-                    <button className="btn btn-outline-light">See more</button>
-                    <button className="btn btn-outline-light">
-                        <i className="fa-regular fa-heart"></i>
-                    </button>
-                </div>
+
             </div>
         </div>
     );
